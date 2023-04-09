@@ -16,37 +16,38 @@ fetch(apiUrl)
     .then(function (response) {
         return response.json();
     })
+ 
     .then(function (data) {
         console.log('Fetch Response \n---------');
         console.log(data);
-    });
+    
+    
+    var temp = data.main.temp;
+    var wind = data.wind.speed;
+    var humidity = data.main.humidity;
+
+    $('#temp').text(temp  + '°F' + 'Temp');
+    $('#wind').text(wind + 'mph' + 'MPH');
+    $('#humidity').text(humidity + '%' + 'humidity');
+});
 
 }
-
+// .catch(function (error) {
+//         console.error('Fetch Error \n-------');
+//         console.log(error);
+//     });
 // function for getting weather by city input
-// function getWeather(){
-//     var cityInput = document.getElementById('city').value;
-    
-// }
+
 // addevent listener for the search button
 var btn = document.querySelector('.btn');
 $('.btn').on('click', function(event) {
     event.preventDefault()
     var cityName = $('.city').val();
-    $('.city').append('.city-list');
-    console.log('city-list');
+    $('.city-list').html($('.city').val());
+    // $('.city').append('.city-list');
     searchCity(cityName);
+    
 });
 
 
 
-//  function that throws the results to the html element current-weather
-// fetch(url)
-// .then(response => response.json())
-// .then(data => {
-//     var temperature = data.main.temp;
-//     document.getElementById('temperature').innerHTML = 'Temperature: ${temperature}°C';
-// })
-// console.log(url);
-// }
-// getWeather();
