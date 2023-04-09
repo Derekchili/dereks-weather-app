@@ -32,7 +32,7 @@ function searchCity(cityName) {
       var temp = data.main.temp;
       var wind = data.wind.speed;
       var humidity = data.main.humidity;
-
+     
       $("#current-city-name").text(data.name);
       $("#current-temp").text(temp + "°F" + "Temp");
       $("#current-wind").text(wind + "mph" + "MPH");
@@ -47,11 +47,9 @@ function searchCity(cityName) {
           console.log("forecast Data:\n", data);
 
           // for loop to add the forecast to the cards I hope
-          for (var i = 0; i < 5; i++) {
+          for (var i = 0; i <= 4; i++) {
             var date = new Date(data.list[i * 8].dt_txt.replace(" ", "T"));
-            var dayOfWeek = date.toLocaleDateString("en-US", {
-              weekday: "long",
-            });
+            var dayOfWeek = date.toLocaleDateString('en-US', {month: 'numeric', day: 'numeric', year: 'numeric'});
             var iconCode = data.list[i * 8].weather[0].icon;
             var temp = data.list[i * 8].main.temp;
             var wind = data.list[i * 8].wind.speed;
@@ -62,9 +60,9 @@ function searchCity(cityName) {
               "src",
               "https://openweathermap.org/img/w/" + iconCode + ".png"
             );
-            $("#card" + i + " .card-temp").text(temp + "°F");
-            $("#card" + i + " .card-wind").text(wind + " mph");
-            $("#card" + i + " .card-humidity").text(humidity + "%");
+            $("#card" + i + " .card-temp").text('temp: ' + temp + "°F");
+            $("#card" + i + " .card-wind").text('wind: ' + wind + " mph");
+            $("#card" + i + " .card-humidity").text('humidity: ' + humidity + "%");
           }
         })
         .catch(function (error) {
