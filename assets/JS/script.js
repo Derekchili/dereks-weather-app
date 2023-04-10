@@ -1,9 +1,5 @@
 
-// when i view future result then presented with a five day forecast for that city
-// when I click the history for city search I am again presented current and future conditions for that city
-// need to find the geo codes for a city that is typed in find it on the api weather site
-// will be using local storage for this
-// set up some variables that I can use in functions and document get element by id linking to html
+// this is the main function for searching cities that has both API's in it
 var cityArr = JSON.parse(localStorage.getItem('city')) || [];
 
 function searchCity(cityName) {
@@ -16,7 +12,7 @@ function searchCity(cityName) {
   console.log(apiUrlCurrent);
   console.log(apiUrlForecast);
 
-  // create a fetch url function that returns json response
+   // This is a function to fetch url that returns json response for current
   fetch(apiUrlCurrent)
     .then(function (response) {
       return response.json();
@@ -36,7 +32,7 @@ function searchCity(cityName) {
       $("#current-wind").text("MPH: " + wind + "mph");
       $("#current-humidity").text("Humidity: " + humidity + "%");
 
-      // function to create the forecast 5 day
+      // This is a function to fetch url that returns json response for extended
       fetch(apiUrlForecast)
         .then(function (response) {
           return response.json();
@@ -45,7 +41,7 @@ function searchCity(cityName) {
           console.log("Fetch Response \n----------");
           console.log(data);
           var a = 0;
-          // for loop to add the forecast to the cards I hope
+          // for loop to add the forecast to the cards
           for (var i = 0; i <= data.list.length; i+=7) {
             console.log(data.list[i]);
             var date = new Date(data.list[i].dt_txt.replace(" ", "T"));
@@ -66,6 +62,7 @@ function searchCity(cityName) {
             a++
           }
         })
+        // will tell me if there are errors
         .catch(function (error) {
           console.log("Error fetching forecast data:", error);
         });
@@ -75,19 +72,18 @@ function searchCity(cityName) {
     });
 }
 // function for getting weather by city input
-
 // addevent listener for the search button
 var btn = document.querySelector(".btn");
 $(".btn").on("click", function (event) {
   event.preventDefault();
   var cityName = $(".city").val();
-  // $(".city-list").html($(".city").val());
+  
 // saving city search name to local sotrage
   searchCity(cityName);
   cityArr.push(cityName);
   localStorage.setItem('city', JSON.stringify(cityArr));
 
-// now  on screen load, the last searched history stored in local should display on load
+// This function is for on screen load, the last searched history stored in local should display on load
  
 });
 function renderBtn(){
