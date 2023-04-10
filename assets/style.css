@@ -19,12 +19,12 @@ header {
 
 .search-box {
    
-    background-color: aquamarine;
+    background-color: lightgray;
     margin: 5px;
     padding: 5px;
 }
 .five-day-forecast {
-    height: 75vh;
+    height: 80vh;
     display: flex;
     justify-content: space-between;
     /* visibility: hidden; */
@@ -33,6 +33,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+   
 }
 
 .outlook {
